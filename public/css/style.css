@@ -1,0 +1,364 @@
+:root {
+    --primary-color: #951693;
+    --color-background:rgb(236, 192, 236);
+    --common-color: #e23ae0;
+    --left: -999em;
+    --opacity: 0;
+    --visible: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+}
+.changeColor {
+   color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width:auto;
+}
+
+/*Phần active element*/
+.active {
+    color: var(--primary-color)
+} 
+
+/* Phần name song*/
+.heading {
+    margin: auto;
+    width: fit-content;
+    position: relative;
+}
+
+.playing-header {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+#tittle-heading {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 1px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+#current_playing {
+    color: var(--primary-color);
+    font-weight: bold;
+    align-self: center
+}
+
+/* Phần CD */
+.cd-thum {
+    margin-top: 10px;
+    display:flex;
+    justify-content:center;
+}
+
+.cd-thum img {
+    border-radius: 200px;
+    width: 150px;
+    height: 150px
+}
+
+.cd-thum > div {
+    display: flex;
+    justify-content: center;
+}
+
+/* Phần actions*/
+.actions-list {
+    margin-top:15px;
+    display: flex;
+   justify-content: center;
+}
+
+.size-custom {
+    font-size: 18px;
+}
+
+.size-custom-playing {
+    font-size: 28px;
+}
+
+.actions-btn {
+    display: flex;
+    justify-content: space-around;
+}
+
+.vehical-element {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.changeIcon {
+    display:none
+}
+
+
+/* Phần process song*/
+.process-song {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    accent-color: var(--primary-color)
+}
+
+.container-song input[type='range'] {
+    width: 100%;
+    accent-color: var(--primary-color);
+}
+
+/*Phần play-list*/
+.li-cursor {
+    cursor: pointer;
+}
+.play-list {
+    display:flex;
+    justify-content: center
+}
+
+.play-list ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    padding: 0;
+}
+
+.menu-song {
+    width: 90%;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius:5px;
+    margin: 2px 0;
+    padding: 14px 15px 15px 15px ;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.menu-song::after {
+    position: absolute;
+    content: '';
+    left: var(--left);
+    transform: translateY(10px);
+    width: 0;
+    height: 0;
+    opacity: var(--opacity);
+    transition: opacity 2s;
+    visibility: var(--visible);
+}
+
+.menu-song-avatar img {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;   
+}
+
+
+ .options-action-single-song {
+    display: flex;
+    align-items: center;
+}
+
+.menu-song-name-and-author {
+    flex-grow: 1;
+    padding: 3px 25px;
+    display: flex;
+    flex-direction: column;
+    width: 165px;   
+}
+
+span .option-song-name, span .option-author-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    max-width: 100%;
+}
+
+
+.option-author-name {
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/*Custom width cho các parents*/ 
+ .cd-thum >div, .actions-btn
+, .container-song, .option-songs {
+    width: 300px;
+}
+
+/*Message*/
+
+.toast-warning {
+    display:flex;
+    justify-content: center;
+    opacity: 0; /* Ban đầu toast ẩn đi */
+    pointer-events: none;
+    position: relative;
+}
+
+.message-toast {
+    width: 300px;
+    border: groove;
+    background-color: #fff;
+    border-radius:5px;
+}
+
+.message-toast h3 {
+    border: groove;
+    width: 97%;
+    border-width: 2px;
+    border-color: black;
+    border-radius:5px;
+    padding-left:5px;
+}
+
+.message-toast h3 {
+    margin: 0
+}
+
+.color-warning {
+    color: red;
+}
+
+.content-toast {
+    margin-top:30px;
+}
+
+/*KeyFrames*/
+@keyframes displayToast {
+    0%   { bottom:350px;  opacity: 0.5; }
+    75%  { bottom:400px;  opacity: 0.8;}
+    100% { bottom:400px;  opacity: 1; }
+}
+
+@keyframes opacityEffect {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+.show {
+  pointer-events: auto; /* Bật khả năng tương tác với phần tử khi nó hiển thị */
+  animation: displayToast 1s forwards; /* Kích hoạt animation */
+}
+
+/*Thêm mới song*/
+.icon-create i{
+    color: #fff;
+}
+.icon-create:hover {
+    cursor: pointer;
+}
+.add-song-box{
+    border-style: solid;
+    border-color: black;
+    background-color: #fff;
+    position:absolute;
+    right:200px;
+    border-radius:3px;
+    padding: 4px;
+    display:none;
+}
+
+.heading-add-new-song {
+  border-bottom: solid;
+  border-radius: 3px;
+  margin:-4px;
+}
+
+.heading-add-new-song i {
+    color: red;
+    float: right;
+}
+
+.heading-add-new-song i:hover {
+    cursor: pointer;
+}
+
+.heading-add-new-song h4 {
+    margin:0;
+}
+
+.action-add-new-song {
+    margin-top:5px;
+    display: flex;
+    width: 380px;
+    justify-content: space-between
+}
+
+.left-section-label {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 5
+}
+
+.right-section-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.cover-added-btn {
+ margin-top: 8px;
+}
+
+#added-song {
+    float:right
+}
+
+/*Message khi hover vào name song quá dài*/
+
+.display-full-song-name {
+    position: absolute;
+    border: var(--common-color);
+    width: fit-content;
+    height: fit-content;
+    border-style: solid;
+    transform: translateY(-5px);
+    background-color: #fff;
+    color: black;
+    padding: 5px;
+    border-radius: 10px;
+    opacity: 0;  /* Start with invisible */
+    visibility: hidden;  /* Ensure it's not interactable */
+    transition: opacity 2s;
+    left: -999em;
+}
+
+.display-full-song-name.visible {
+    opacity: 1;  /* Make it fully visible */
+    visibility: visible;  /* Ensure it's interactable */
+    left: 104%;
+    transition-timing-function: linear;
+}
+
+  
+.show-after::after {
+    left: 100%;
+    border-top: 15px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 15px solid var(--common-color);
+    opacity: 1;
+    transition-timing-function: linear;
+    visibility: visible;
+}
+
+

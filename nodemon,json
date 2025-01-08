@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "public",
+    "index.html",
+    "file-operations/files-operations.mjs",
+    "FilesUploaded"
+],
+  "ext": "js, json, html, mjs",
+  "ignore": ["node_modules", "JS.docx", ".vscode", "Json_server"]
+}
