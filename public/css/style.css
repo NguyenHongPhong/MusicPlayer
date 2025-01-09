@@ -7,10 +7,15 @@
     --visible: hidden;
 }
 
+html, body {
+    overflow: hidden;
+}
+
 body {
     margin: 0;
     padding: 0;
     background-size: cover;
+    height: 100%
 }
 .changeColor {
    color: #fff;
@@ -20,6 +25,7 @@ body {
     display: flex;
     flex-direction: column;
     width:auto;
+    height: 100%;
 }
 
 /*Phần active element*/
@@ -117,13 +123,15 @@ body {
     accent-color: var(--primary-color);
 }
 
+
 /*Phần play-list*/
 .li-cursor {
     cursor: pointer;
 }
+
 .play-list {
-    display:flex;
-    justify-content: center
+   
+    height: 370px;
 }
 
 .play-list ul {
@@ -176,7 +184,7 @@ body {
     padding: 3px 25px;
     display: flex;
     flex-direction: column;
-    width: 165px;   
+    width: 150px;   
 }
 
 span .option-song-name, span .option-author-name {
@@ -198,7 +206,30 @@ span .option-song-name, span .option-author-name {
 , .container-song, .option-songs {
     width: 300px;
 }
+ 
+.option-songs {
+    height: 357px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0 auto;
+    position: absolute;
+    top: 40%;
+    left: 38%;
+}
 
+ul .option-songs::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+ul .option-songs::-webkit-scrollbar-track {
+    background:rgb(132, 126, 126); 
+  }
+   
+  /* Handle */
+ul .option-songs::-webkit-scrollbar-thumb {
+    background: #fff; 
+  }
 /*Message*/
 
 .toast-warning {
@@ -207,6 +238,7 @@ span .option-song-name, span .option-author-name {
     opacity: 0; /* Ban đầu toast ẩn đi */
     pointer-events: none;
     position: relative;
+    height: 100%;
 }
 
 .message-toast {
@@ -214,6 +246,7 @@ span .option-song-name, span .option-author-name {
     border: groove;
     background-color: #fff;
     border-radius:5px;
+    height: 100%;
 }
 
 .message-toast h3 {
@@ -264,6 +297,8 @@ span .option-song-name, span .option-author-name {
 /*Thêm mới song*/
 .icon-create i{
     color: #fff;
+    display: flex;
+    justify-content: center;
 }
 .icon-create:hover {
     cursor: pointer;
@@ -346,7 +381,7 @@ span .option-song-name, span .option-author-name {
 .display-full-song-name.visible {
     opacity: 1;  /* Make it fully visible */
     visibility: visible;  /* Ensure it's interactable */
-    left: 104%;
+    left: 10%;
     transition-timing-function: linear;
 }
 
@@ -360,5 +395,30 @@ span .option-song-name, span .option-author-name {
     transition-timing-function: linear;
     visibility: visible;
 }
+
+/*
+*Response cho ứng dụng 
+*/
+
+@media (min-width: 1264px) and (max-width: 1272px) {
+    .option-songs {
+      left: 35%;
+    }
+    
+}
+
+@media (min-width: 1206px) and (max-width: 1262px) {
+    .option-songs {
+      left: 446px;
+    }
+}
+
+@media (min-width: 1206px) and (max-width: 1247px) {
+    .option-songs {
+      left: 437px;
+    }
+}
+
+
 
 
