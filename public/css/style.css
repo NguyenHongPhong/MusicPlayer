@@ -130,17 +130,19 @@ body {
 }
 
 .play-list {
-   
-    height: 370px;
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.play-list ul {
+/* .play-list ul {
     list-style-type: none;
     display: flex;
     flex-direction: column;
     justify-content: center; 
     padding: 0;
-}
+} */
 
 .menu-song {
     width: 90%;
@@ -214,7 +216,7 @@ span .option-song-name, span .option-author-name {
     margin: 0 auto;
     position: absolute;
     top: 40%;
-    left: 38%;
+    padding: 0;
 }
 
 ul .option-songs::-webkit-scrollbar {
@@ -419,6 +421,11 @@ ul .option-songs::-webkit-scrollbar-thumb {
     }
 }
 
-
+.test {
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 
