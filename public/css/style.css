@@ -173,6 +173,20 @@ body {
  .options-action-single-song {
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.function-box {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    left: -768%;
+    top: 18%;
+}
+
+.function-box > select {
+    height: 28%;
+    border-radius: 7px;
 }
 
 .menu-song-name-and-author {
@@ -195,6 +209,10 @@ span .option-song-name, span .option-author-name {
 .option-author-name {
     font-size: 12px;
     margin-top: 3px;
+}
+
+.options-action-single-song:hover {
+    color: #e400e3;
 }
 
 /*Custom width cho các parents*/ 
@@ -320,6 +338,7 @@ ul .option-songs::-webkit-scrollbar-thumb {
     height: 70px;
     width: 100%;
     z-index: 2;
+    visibility: hidden;
 }
 
 .box-adding-song::after {
@@ -417,6 +436,9 @@ ul .option-songs::-webkit-scrollbar-thumb {
     float:right
 }
 
+.none-action {
+    pointer-events: none;
+} 
 /*Message khi hover vào name song quá dài*/
 
 .display-full-song-name {
@@ -501,7 +523,7 @@ ul .option-songs::-webkit-scrollbar-thumb {
 
 .toast-detail span {
     margin-top: 20px;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .toast-icon {
