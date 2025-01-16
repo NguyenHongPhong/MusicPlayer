@@ -178,14 +178,26 @@ body {
 
 .function-box {
     position: absolute;
-    height: 100px;
-    width: 100px;
+    height: auto;
+    width: auto;
     left: -768%;
     top: 18%;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateX(100%) scaleX(0); /* Bắt đầu từ kích thước 0 */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.active-display {
+    opacity: 1;
+    transform: translateX(-4%) scaleX(1); 
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .function-box > select {
-    height: 28%;
+    height: 31px;
     border-radius: 7px;
 }
 

@@ -71,7 +71,6 @@ const fileUploadHandler = {
     }   
   },
 
-
   setup: function(imgPath, musPath, app) {    
     const storage = multer.diskStorage({
       destination: function(req, file, cb) {
@@ -103,8 +102,6 @@ const fileUploadHandler = {
       res.sendFile(path.join(__dirname, './index.html'));  // Đường dẫn tuyệt đối
     });
 
-   
-
     // Định nghĩa endpoint /upload với POST
     app.post('/upload',
       upload.fields([{ name: 'image-file', maxCount: 1 }, { name: 'music-file', maxCount: 1 }]), // Nhận tệp ảnh
@@ -128,10 +125,6 @@ const fileUploadHandler = {
         } catch (error) {
           console.error('Server error:', error);
           next(error);
-          // res.status(500).json({
-          //   message: 'Internal Server Error',
-          //   error: error.message
-          // });
         }
       });
 
@@ -139,10 +132,8 @@ const fileUploadHandler = {
            if(err) {
            return res.status(400).json({message: err.message});
          }
-       
       })
   },
-  
 
   start: async function() {
     try {
