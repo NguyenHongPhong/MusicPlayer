@@ -9,15 +9,16 @@
 
 html, body {
     overflow: hidden;
+    height: 100%;
+    width: 100%;
 }
 
 body {
     margin: 0;
     padding: 0;
     background-size: cover;
-    height: 100%;
-    width: 100%;
 }
+
 .changeColor {
    color: #fff;
 }
@@ -540,4 +541,63 @@ ul .option-songs::-webkit-scrollbar-thumb {
 
 .toast-icon {
     color: green;
+}
+
+/*
+* Hiển thị detail infor song
+*/
+
+.infor-song {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    z-index: 1;
+}
+
+.detail-infor-song {
+    width: fit-content;
+    height: auto;
+    background-color: #CE93D8;
+    margin: 18% auto;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-infor-song .image-song {
+    width: 105px;
+    height: 100px;
+    border-radius: 74px;
+    overflow: hidden;
+    margin: 0 auto 5px auto;
+}
+
+.detail-infor-song .image-song img {
+    width: 100%;
+    height: 100%;
+}
+
+.detail-infor-song .name-song {
+    margin: 5px 0;
+}
+
+.detail-infor-song .singer-song {
+    margin: 5px 0;
+}
+
+.detail-infor-song .close-btn i {
+    float: right;
+    font-size: 20px;
+    color: red;
+}
+
+
+.detail-infor-song .name-song span {
+    font-weight: bold;
+}
+
+.detail-infor-song .singer-song span {
+    font-weight: bold;
 }
