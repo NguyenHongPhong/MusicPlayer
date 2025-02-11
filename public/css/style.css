@@ -723,3 +723,25 @@ ul .option-songs::-webkit-scrollbar-thumb {
     position: relative;
     z-index: 1;
 }
+
+.icon-change-music {
+    color: #e23ae0;
+    margin-left: 15px;
+}
+
+.icon-change-music:hover {
+    cursor: pointer;
+    opacity: .8
+}
+
+#music-update {
+    display: flex;
+    align-items: center;
+}
+#music-update a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 225px;
+}

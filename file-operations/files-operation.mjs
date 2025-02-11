@@ -1,13 +1,9 @@
 import fs from 'fs';
 import multer from 'multer';
 import express from 'express';
-import path from 'path';
+import path, { resolve } from 'path';
 import morgan from 'morgan';
-import os from 'os';
-
-
-
-
+import { promises } from 'dns';
 
 const resourcePath = '/public';
 const __dirname = 'D:/learningLanguageProgram/MusicPlayer';
@@ -22,19 +18,6 @@ app.use(morgan('combined'));
 app.use(express.static(path.join(__dirname + resourcePath)));
 // Cấu hình Express để phục vụ tệp tĩnh từ thư mục FilesUploaded
 app.use('/FilesUploaded', express.static(path.join(__dirname, './public/assets/FilesUploaded')));
-
-// Cấu hình vô  hiệu hóa cache
-app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store');
-  next();
-});
-
-setInterval(() => {
-  console.log('Total Memory: ' + os.totalmem() / (1024 * 1024) + ' MB');
-  console.log('Free Memory: ' + os.freemem() / (1024 * 1024) + ' MB');
-  const used = process.memoryUsage().heapUsed / 1024 / 1024;
-console.log(`The script uses approximately ${Math.round(used * 100) / 100} MB`);
-}, 5000);
 
 
 const fileUploadHandler = {
@@ -70,7 +53,28 @@ const fileUploadHandler = {
         console.error('Lỗi khi tạo thư mục Music:', error);
     }   
   },
+  
+  storageDataUpdated: async () => {
+    try {
+      const pathFolder = path.join(__dirname, './public/assets/updatedFiles');
+      const imagesPath = pathFolder + '/images';
+      const musicsPath = pathFolder + '/musics';
+      await fs.promises.mkdir(pathFolder, { recursive: true });
+      await fs.promises.mkdir(imagesPath, { recursive: true });
+      await fs.promises.mkdir(musicsPath, { recursive: true });
+      console.log('Tạo thư mục Cập nhật thành công !!');
+      const parseObject = JSON.stringify({img: imagesPath, mus: musicsPath});
+      return await new Promise((resolve)=> {
+        resolve(parseObject);
+      });
+  } catch (error) {
+      console.log(error);
+  }
+  },
 
+  storageUpdatingFiles: (path) => {
+   console.log(path);
+  },
   setup: function(imgPath, musPath, app) {    
     const storage = multer.diskStorage({
       destination: function(req, file, cb) {
@@ -128,17 +132,19 @@ const fileUploadHandler = {
         }
       });
 
+      app.post('/update', )
+
       app.use((err, req, res, next)=> {
            if(err) {
            return res.status(400).json({message: err.message});
          }
       })
   },
-
   start: async function() {
     try {
       const pathToFolder = await this.createFolder();
       this.setup(pathToFolder.imagePath, pathToFolder.musicPath, app);
+      this.storageUpdatingFiles(fileUploadHandler.storageDataUpdated().then((val) => val));
     } catch (error) { 
       console.log(error);
     }
