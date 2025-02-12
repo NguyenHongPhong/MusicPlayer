@@ -9,3 +9,4 @@ code .
 4. The Visual Studio app will open
 5. Enter command: npm i
 6. npm start
+Note: Thấy chức năng nào chạy không được bạn cứ reload lại trang là oke nhé. Mình mới làm nên còn nhiều thiếu xót

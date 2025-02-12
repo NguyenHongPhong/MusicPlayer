@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname + resourcePath)));
 // Cấu hình Express để phục vụ tệp tĩnh từ thư mục FilesUploaded
 app.use('/FilesUploaded', express.static(path.join(__dirname, './public/assets/FilesUploaded')));
 
+app.use('/updatedFiles', express.static(path.join(__dirname, './public/assets/updatedFiles')));
 
 const fileUploadHandler = {
   
@@ -54,7 +55,7 @@ const fileUploadHandler = {
     }   
   },
   
-  storageDataUpdated: async () => {
+  pathFolderSetting: async () => {
     try {
       const pathFolder = path.join(__dirname, './public/assets/updatedFiles');
       const imagesPath = pathFolder + '/images';
@@ -64,16 +65,61 @@ const fileUploadHandler = {
       await fs.promises.mkdir(musicsPath, { recursive: true });
       console.log('Tạo thư mục Cập nhật thành công !!');
       const parseObject = JSON.stringify({img: imagesPath, mus: musicsPath});
-      return await new Promise((resolve)=> {
+      
+      const rs = await new Promise((resolve)=> {
         resolve(parseObject);
       });
+
+      return rs;
   } catch (error) {
       console.log(error);
   }
   },
 
-  storageUpdatingFiles: (path) => {
-   console.log(path);
+  storageUpdatingFiles: (objectPath) => {
+    const parsePath = JSON.parse(objectPath);
+
+    const storage = multer.diskStorage({
+      destination: function(req, file, cb) {
+        file.mimetype == 'image/jpeg' || file.mimetype === 'image/png' ? cb(null, parsePath.img) : cb(null, parsePath.mus)
+      },
+      filename: function(req, file, cb) {
+        let enCoding = Buffer.from(file.originalname, 'latin1').toString('utf8');
+        let convertedNameFile = enCoding.split('.');
+        convertedNameFile.pop();
+        let nameFile = convertedNameFile.join('').replace(/ /g, '&');;
+        cb(null, nameFile + '-' + Date.now() + path.extname(file.originalname));  
+      }
+    });
+
+    const uploadFilesUpdated = multer({ storage: storage});
+
+    app.post('/update',   
+      uploadFilesUpdated.fields([{ name: 'image-file', maxCount: 1 }, 
+                                 { name: 'music-file', maxCount: 1 }]), 
+    async (req, res, next) => {
+       try {
+         if (req.files) {
+           const imageFile = req.files['image-file'] ? req.files['image-file'][0].filename : null;
+           const musicFile = req.files['music-file'] ? req.files['music-file'][0].filename : null;
+
+           res.status(201).json({
+             message: 'Files updated successfully',
+             image: imageFile, // Tên tệp 1
+             music: musicFile  // Tên tệp 2          
+           });
+         } else {
+           console.log('No files updated');
+           res.status(400).json({
+             message: 'No files updated'
+           });
+         }
+       } catch (error) {
+         console.error('Server error:', error);
+         next(error);
+       }
+     })
+
   },
   setup: function(imgPath, musPath, app) {    
     const storage = multer.diskStorage({
@@ -144,7 +190,8 @@ const fileUploadHandler = {
     try {
       const pathToFolder = await this.createFolder();
       this.setup(pathToFolder.imagePath, pathToFolder.musicPath, app);
-      this.storageUpdatingFiles(fileUploadHandler.storageDataUpdated().then((val) => val));
+      fileUploadHandler.pathFolderSetting().then((val) => fileUploadHandler.storageUpdatingFiles(val)
+      )
     } catch (error) { 
       console.log(error);
     }

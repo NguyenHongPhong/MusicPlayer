@@ -2,5 +2,6 @@ node_modules/
 .vscode/
 .VSCodeCounter/
 public/assets/FilesUploaded/
+public/assets/updatedFiles/
 Json_server/
 JS/
